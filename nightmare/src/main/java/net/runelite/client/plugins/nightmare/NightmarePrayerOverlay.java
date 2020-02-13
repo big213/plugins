@@ -23,12 +23,13 @@ public class NightmarePrayerOverlay extends Overlay
 	private static final Color NOT_ACTIVATED_BACKGROUND_COLOR = new Color(150, 0, 0, 150);
 	private final Client client;
 	private final NightmarePlugin plugin;
+	private final NightmareConfig config;
 	private final SpriteManager spriteManager;
 	private final PanelComponent imagePanelComponent = new PanelComponent();
 	private static final int NM_PRE_REGION = 15256;
 
 	@Inject
-	private NightmarePrayerOverlay(final Client client, final NightmarePlugin plugin, final SpriteManager spriteManager)
+	private NightmarePrayerOverlay(final Client client, final NightmarePlugin plugin, final NightmareConfig config, final SpriteManager spriteManager)
 	{
 		setLayer(OverlayLayer.ABOVE_SCENE);
 		setPriority(OverlayPriority.HIGH);
@@ -36,6 +37,7 @@ public class NightmarePrayerOverlay extends Overlay
 		setPosition(OverlayPosition.BOTTOM_RIGHT);
 		this.client = client;
 		this.plugin = plugin;
+		this.config = config;
 		this.spriteManager = spriteManager;
 	}
 
@@ -43,7 +45,7 @@ public class NightmarePrayerOverlay extends Overlay
 	{
 		imagePanelComponent.getChildren().clear();
 
-		if (!plugin.isPrayerHelper())
+		if (!config.prayerHelper())
 		{
 			return null;
 		}
